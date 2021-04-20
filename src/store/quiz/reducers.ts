@@ -3,6 +3,7 @@ import { produce } from "immer";
 import {
   SET_FETCHED_QUESTIONS,
   SET_QUESTION_RESPONSE,
+  SET_QUIZ_HEADER,
   SET_API_TOKEN,
   SET_QUIZ_DETAILS,
   HANDLE_API_ERROR,
@@ -12,9 +13,10 @@ import {
 
 
 const state = {
-  questions: {},
+  questions: [],
   status: "Initial",
   message: "",
+  header: "Truthy Falsy Quiz",
   token: "",
   numberOfQuestions: 10,
   difficulty: "hard",
@@ -26,14 +28,19 @@ const reducer = produce<any>((base: any, action: any) => {
   switch (action.type) {
     case SET_FETCHED_QUESTIONS: {
       base.status = "Success";
-      base.questions = {...base.questions, ...action.payload};
+      base.questions = [...base.questions, ...action.payload];
       break;
     }
     case SET_QUESTION_RESPONSE: {
-      base.questions[action.payload.question] = {
-        ...base.questions[action.payload.question],
+      base.questions[action.payload.idx] = {
+        ...base.questions[action.payload.idx],
         response: action.payload.response,
       };
+
+      break;
+    }
+    case SET_QUIZ_HEADER: {
+      base.header = action.payload;
       break;
     }
     case SET_API_TOKEN: {

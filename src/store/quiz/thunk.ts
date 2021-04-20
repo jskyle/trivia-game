@@ -6,15 +6,14 @@ import {
 
 import * as actions from './actions';
 import { getQuizDetails } from './selectors';
-import { convertArrayToObject } from '../utils'; 
  
 
 export const fetchSessionTokenThunk = () => async (dispatch: Dispatch) => {
 
   dispatch(actions.handleApiFetching());
 
-  return fetchSessionToken().then((res: any) => {
-    dispatch(actions.setApiToken(res));
+  return fetchSessionToken().then(({data}) => {
+    dispatch(actions.setApiToken(data.token));
   }).catch((err) => {
     dispatch(actions.handleApiError(err));
   })
@@ -25,10 +24,8 @@ export const fetchQuestionsThunk = () => async (dispatch: Dispatch, getState: Fu
   const {token, numberOfQuestions, difficulty} = getQuizDetails(state);
   dispatch(actions.handleApiFetching());
 
-  return fetchQuestions(difficulty, numberOfQuestions, token).then((res: any) => {
+  return fetchQuestions(difficulty, numberOfQuestions, token).then(({data}) => {
 
-    const questions = convertArrayToObject(res.results, "question");
-
-    dispatch(actions.setFetchedQuestions(questions));
+    dispatch(actions.setFetchedQuestions(data.results));
   })
 }
