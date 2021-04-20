@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import parse from "html-react-parser";
 import {
@@ -7,6 +8,7 @@ import {
   ListGroupItem,
   ListGroupItemHeading,
   ListGroupItemText,
+  Button,
 } from "reactstrap";
 import { getQuestions } from "../store/quiz/selectors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,10 +17,12 @@ import {
   faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { setQuizHeader } from "../store/quiz/actions";
+import { fetchQuestionsThunk } from "../store/quiz/thunk";
 
 const ScoreScreen = () => {
   const questions = useSelector((state) => getQuestions(state));
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(
@@ -30,6 +34,12 @@ const ScoreScreen = () => {
     );
     //eslint-disable-next-line
   }, []);
+
+    const handleSubmit = () => {
+    dispatch(fetchQuestionsThunk()).then(() => {
+      history.push("/question/1");
+    });
+  };
 
   return (
     <Row class="d-flex flex-column justify-content-center align-items-center">
@@ -43,7 +53,7 @@ const ScoreScreen = () => {
                 <FontAwesomeIcon
                   icon={correct ? faCheckCircle : faTimesCircle}
                   color={correct ? "green" : "red"}
-                  size="lg"
+                  size="1x"
                   className="mr-2"
                 />
                 {parse(q.question)}
@@ -58,6 +68,7 @@ const ScoreScreen = () => {
           );
         })}
       </ListGroup>
+      <Button color="primary" onClick={handleSubmit}>Play again</Button>
     </Row>
   );
 };

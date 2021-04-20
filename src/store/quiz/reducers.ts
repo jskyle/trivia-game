@@ -27,7 +27,7 @@ const reducer = produce<any>((base: any, action: any) => {
   switch (action.type) {
     case SET_FETCHED_QUESTIONS: {
       base.status = "Success";
-      base.questions = [...base.questions, ...action.payload];
+      base.questions = action.payload;
       break;
     }
     case SET_QUESTION_RESPONSE: {
