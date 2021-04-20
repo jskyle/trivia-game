@@ -1,7 +1,7 @@
 import { createSelector as createCachedSelector } from "reselect";
-import { createSelectorContext } from '../utils';
+import { createSelectorContext } from "../utils";
 
-const createSelector = createSelectorContext(['quiz']);
+const createSelector = createSelectorContext(["quiz"]);
 
 export const getQuestions = createSelector("questions");
 export const getToken = createSelector("token");
@@ -16,12 +16,20 @@ export const getQuizDetails = createCachedSelector(
   getDifficulty,
   getToken,
   getStatus,
-  (numberOfQuestions: any, difficulty: string, token: string, status: string) => {
-    return {numberOfQuestions, difficulty, token, status};
-  });
+  (
+    numberOfQuestions: any,
+    difficulty: string,
+    token: string,
+    status: string
+  ) => {
+    return { numberOfQuestions, difficulty, token, status };
+  }
+);
 
-
-  export const getQuestion = createCachedSelector(getQuestions,  (_: any, idx: number) => idx, (questions: any, idx: number) => {
-
-    return questions[idx - 1]
-  })
+export const getQuestion = createCachedSelector(
+  getQuestions,
+  (_: any, idx: number) => idx,
+  (questions: any, idx: number) => {
+    return questions[idx - 1];
+  }
+);

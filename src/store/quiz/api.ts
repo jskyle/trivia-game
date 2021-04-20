@@ -1,7 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const fetchQuestions = (difficulty: string, amount: number = 10, token: string) => {
-  return axios.get(`https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=boolean&token=${token}`);
+export const fetchQuestions = (
+  difficulty: string,
+  amount: number = 10,
+  token: string
+) => {
+  return axios.get(
+    `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=boolean&token=${token}`
+  );
 };
 
 export const fetchSessionToken = () => {

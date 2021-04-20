@@ -9,8 +9,7 @@ import {
   HANDLE_API_ERROR,
   HANDLE_API_FETCHING,
   RESET_QUIZ,
-} from "./actions"
-
+} from "./actions";
 
 const state = {
   questions: [],
@@ -58,10 +57,10 @@ const reducer = produce<any>((base: any, action: any) => {
       base.message = action.payload;
       break;
     }
-    case HANDLE_API_FETCHING: 
+    case HANDLE_API_FETCHING:
       base.status = "Fetching";
       break;
-    case RESET_QUIZ: 
+    case RESET_QUIZ:
       base = state;
   }
 }, state);
