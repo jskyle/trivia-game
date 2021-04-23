@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Container } from "reactstrap";
 import { Header, StartScreen, ScoreScreen, Question } from "./components";
-import "./App.css";
 import { fetchSessionTokenThunk } from "./store/quiz/thunk";
 import PrivateRoute from "./utils/PrivateRoute";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";

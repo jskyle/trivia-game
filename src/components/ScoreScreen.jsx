@@ -35,7 +35,7 @@ const ScoreScreen = () => {
     //eslint-disable-next-line
   }, []);
 
-    const handleSubmit = () => {
+  const handleSubmit = () => {
     dispatch(fetchQuestionsThunk()).then(() => {
       history.push("/question/1");
     });
@@ -68,7 +68,9 @@ const ScoreScreen = () => {
           );
         })}
       </ListGroup>
-      <Button color="primary" onClick={handleSubmit}>Play again</Button>
+      <Button color="primary" onClick={handleSubmit}>
+        Play again
+      </Button>
     </Row>
   );
 };
